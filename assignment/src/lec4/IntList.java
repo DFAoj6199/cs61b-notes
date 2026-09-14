@@ -39,4 +39,38 @@ public class IntList {
         }
         return p.val;
     }
+
+    public IntList incrementList(int x) {
+        IntList newList = new IntList(0);
+        IntList p = this;
+        IntList n = newList;
+        while (p.next != null) {
+            n.val = p.val - x;
+            p = p.next;
+            n.next = new IntList(0);
+            n = n.next;
+        }
+        n.val = p.val - x;
+        n.next = null;
+        return newList;
+    }
+
+    public void printList() {
+        IntList p = this;
+        while (p.next != null) {
+            System.out.print(p.val + " -> ");
+            p = p.next;
+        }
+        System.out.println(p.val);
+    }
+
+    public IntList dincrList(int x) {
+        IntList p = this, q = this;
+        p.next = this.next;
+        while (p != null) {
+            p.val -= x;
+            p = p.next;
+        }
+        return q;
+    }
 }

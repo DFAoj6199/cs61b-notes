@@ -9,6 +9,13 @@ public class temp {
 
         System.out.println(l.getSize());
         System.out.println(l.iterativeSize());
-        System.out.println(l.get(4));
+        //System.out.println(l.get(4));
+        l.printList();
+        IntList newL = l.incrementList(5);
+        newL.printList();
+
+        IntList newL2 = l.dincrList(5);
+        newL2.printList();
+        l.printList();
     }
 }
