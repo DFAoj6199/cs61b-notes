@@ -110,9 +110,14 @@ public class Model extends Observable {
         boolean changed;
         changed = false;
 
+        /** !!IMPORTANT!!
+         *  move(x, y, t)函数中，x 为列，最左边为第 0 列
+         *  y 为行，最下边为第 0 行 ！！！
+         *  t 为一个 Tile 对象*/
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
+        //board.move();
 
         checkGameOver();
         if (changed) {
