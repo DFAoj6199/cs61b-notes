@@ -169,7 +169,6 @@ public class Model extends Observable {
      * 2. There are two adjacent tiles with the same value.
      */
     public static boolean atLeastOneMoveExists(Board b) {
-        // TODO: Fill in this function.
        int[][] dir = {{0, 1},{1, 0},{0, -1},{-1, 0}};
        int size = b.size();
 
