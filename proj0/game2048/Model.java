@@ -94,6 +94,22 @@ public class Model extends Observable {
         setChanged();
     }
 
+    public int findAvaliableRow(int col, int row, int val, boolean[][] moved) {
+        int size = board.size();
+        for (int i = row + 1; i < size; i++) {
+            if (board.tile(col, i) != null) {
+                if (board.tile(col, i).value() == val && !moved[col][i]) {
+                    return i;
+                }
+                else {
+                    return i - 1;
+                }
+            }
+        }
+
+        return size - 1;
+    }
+
     /** Tilt the board toward SIDE. Return true iff this changes the board.
      *
      * 1. If two Tile objects are adjacent in the direction of motion and have
@@ -107,22 +123,60 @@ public class Model extends Observable {
      *    and the trailing tile does not.
      * */
     public boolean tilt(Side side) {
+        // System.out.println("Tilt called! Side = " + side);
         boolean changed;
         changed = false;
+        switch (side) {
+            case NORTH:
+                break;
+            case EAST:
+                board.setViewingPerspective(Side.EAST);
+                break;
+            case SOUTH:
+                board.setViewingPerspective(Side.SOUTH);
+                break;
+            case WEST:
+                board.setViewingPerspective(Side.WEST);
+                break;
+        }
 
         /** !!IMPORTANT!!
          *  move(x, y, t)函数中，x 为列，最左边为第 0 列
          *  y 为行，最下边为第 0 行 ！！！
          *  t 为一个 Tile 对象 */
-        // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
-        //board.move();
+        // board.move();
+        int size = board.size();
+        boolean[][] moved = new boolean[size][size];
 
+        // 假设所有操作都为 上
+        // 先全部遍历找出有方块的位置，然后从它开始往上找到可以合并的位置
+        // 或者可以放置的空行
+            //System.out.println(1);
+            for (int j = size - 2; j >= 0; j--) { // 行遍历，从正数第二行开始
+                for (int i = 0; i < size; i++) { // 列遍历
+                    Tile t = board.tile(i, j);
+                    if (t != null) {
+                        int dst = findAvaliableRow(i, j, t.value(), moved);
+                        if (dst != j) {
+                            if (board.move(i, dst, t)) {
+                                //System.out.println("Move complete");
+                                score += 2 * t.value();
+                                moved[i][dst] = true;
+                            }
+
+                            changed = true;
+                        }
+                    }
+                }
+            }
+        board.setViewingPerspective(Side.NORTH);
         checkGameOver();
         if (changed) {
             setChanged();
         }
+        // System.out.println("Returning changed = " + changed);
         return changed;
     }
 
