@@ -56,6 +56,22 @@ public class DLLIST<T> {
         size--;
     }
 
+    public T getFront() {
+        if (empty()) {
+            throw new RuntimeException("List is empty");
+        }
+
+        return sentinelNode.next.val;
+    }
+
+    public T getBack() {
+        if (empty()) {
+            throw new RuntimeException("List is empty");
+        }
+
+        return sentinelNode.pre.val;
+    }
+
     public void printList() {
         if(empty()) {
             System.out.println("List is empty");

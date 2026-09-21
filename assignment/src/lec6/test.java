@@ -13,7 +13,11 @@ public class test {
         list.printList();
         list.removeLast();
         list.printList();
+        list.removeFirst();
+        list.printList();
         System.out.println(list.size());
         System.out.println(list.empty());
+        System.out.println(list.getFront());
+        System.out.println(list.getBack());
     }
 }
