@@ -9,7 +9,7 @@ public class AList<T> {
         arr = (T[]) new Object[10];
     }
 
-    public void resize(int newLength) {
+    private void resize(int newLength) {
         T[] newArr = (T[]) new Object[newLength];
         System.arraycopy(arr, 0, newArr, 0, size);
         arr = newArr;
