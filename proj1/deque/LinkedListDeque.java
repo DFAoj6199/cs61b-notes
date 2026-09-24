@@ -84,6 +84,7 @@ public class LinkedListDeque<T> {
         itemsToReturn.pre = null;
         itemsToReturn.next = null;
 
+        size--;
         return itemsToReturn.data;
     }
 
@@ -98,6 +99,7 @@ public class LinkedListDeque<T> {
         itemsToReturn.pre = null;
         itemsToReturn.next = null;
 
+        size--;
         return itemsToReturn.data;
     }
 
