@@ -1,6 +1,6 @@
 package lec10;
 
-public class Dog implements OurComparable {
+public class Dog implements Comparable<Dog> {
     private String name;
     private int size;
 
@@ -14,7 +14,7 @@ public class Dog implements OurComparable {
     }
 
     @Override
-    public int compareTo(Object o) {
+    public int compareTo(Dog o) {
         Dog uddaDog = (Dog) o;
         return this.size - uddaDog.size;
     }
