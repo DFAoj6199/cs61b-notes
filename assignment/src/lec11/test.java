@@ -13,14 +13,22 @@ public class test
         System.out.println(set.contains(2));
         System.out.println(set.contains(4));
 
-        Iterator<Integer> seer = set.iterator();
-        while(seer.hasNext()) {
-            System.out.println(seer.next());
-        }
+        System.out.println("========================");
 
         // for - each
         for (int i : set) {
             System.out.println(i);
         }
+
+        System.out.println("========================");
+
+        System.out.println(set);
+
+        System.out.println("========================");
+
+        ArraySet<String> aset1 = ArraySet.of("Hi", "I'm", "here!");
+        System.out.println(aset1);
+        ArraySet<String> aset2 = ArraySet.of("Hi", "I'm", "here!");
+        System.out.println(aset1.equals(aset2));
     }
 }
