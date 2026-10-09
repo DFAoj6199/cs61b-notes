@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
+public class ArrayDeque<T> implements Deque<T> {
     private T[] arr;
     private int size;
     private int nextHead;
@@ -17,10 +17,10 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
 
     @Override
     public Iterator<T> iterator() {
-        return new arrayDequeIterator();
+        return new ArrayDequeIterator();
     }
 
-    private class arrayDequeIterator implements Iterator<T> {
+    private class ArrayDequeIterator implements Iterator<T> {
         private int index = 0;
 
         @Override
@@ -68,8 +68,8 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
 
     @Override
     public T removeLast() {
-        if (isEmpty()) return null;
-        if (size < arr.length / 4 && size >= 16) {
+        if (isEmpty()) { return null; }
+        if (size < arr.length / 4 && arr.length >= 16) {
             resize(arr.length / 2);
         }
 
@@ -82,9 +82,31 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (o instanceof Deque dq) {
+            if (dq.size() != this.size()) {
+                return false;
+            }
+
+            Iterator<T> thisIterator = this.iterator();
+            Iterator<T> dqIterator = dq.iterator();
+
+            while (thisIterator.hasNext() && dqIterator.hasNext()) {
+                if (!thisIterator.next().equals(dqIterator.next())) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public T removeFirst() {
-        if (isEmpty()) return null;
-        if (size < arr.length / 4 && size >= 16) {
+        if (isEmpty()) { return null; }
+        if (size < arr.length / 4 && arr.length >= 16) {
             resize(arr.length / 2);
         }
 

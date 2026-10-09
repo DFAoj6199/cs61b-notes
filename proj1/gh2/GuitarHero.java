@@ -3,8 +3,8 @@ import edu.princeton.cs.algs4.StdAudio;
 import edu.princeton.cs.algs4.StdDraw;
 
 public class GuitarHero {
-    public static String keyboard = "q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' ";
-    public static GuitarString[] strings = new GuitarString[37];
+    private static String keyboard = "q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' ";
+    private static GuitarString[] strings = new GuitarString[37];
 
     public static double getFrequency(int index) {
         return 440.0 * Math.pow(2, (index - 24.0) / 12.0);

@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
+public class LinkedListDeque<T> implements Deque<T> {
     private static class Node<T> {
         private T data;
         private Node<T> next;
@@ -19,7 +19,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         size = 0;
     }
 
-    private class linkedListDequeIterator implements Iterator<T> {
+    private class LinkedListDequeIterator implements Iterator<T> {
         Node<T> current = sentinelNode.next;
 
         @Override
@@ -37,7 +37,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new linkedListDequeIterator();
+        return new LinkedListDequeIterator();
     }
 
     /**
@@ -48,12 +48,12 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
      * @return 元素的值
      */
     private T recursive(Node<T> n, int index) {
-        if (index == 0) return n.data;
+        if (index == 0) { return n.data; }
         return recursive(n.next, index - 1);
     }
 
     public T getRecursive(int index) {
-        if (index < 0 || index >= size) return null;
+        if (index < 0 || index >= size) { return null; }
         return recursive(sentinelNode.next, index);
     }
 
@@ -98,7 +98,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 
     @Override
     public T removeFirst() {
-        if (isEmpty()) return null;
+        if (isEmpty()) { return null; }
 
         Node<T> itemsToReturn = sentinelNode.next;
 
@@ -114,7 +114,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 
     @Override
     public T removeLast() {
-        if (isEmpty()) return null;
+        if (isEmpty()) { return null; }
 
         Node<T> itemsToReturn = sentinelNode.pre;
 
@@ -129,8 +129,30 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (o instanceof Deque dq) {
+            if (size() != dq.size()) {
+                return false;
+            }
+
+            Iterator<T> thisIterator = this.iterator();
+            Iterator<T> dqIterator = dq.iterator();
+
+            while (thisIterator.hasNext() && dqIterator.hasNext()) {
+                if (!thisIterator.next().equals(dqIterator.next())) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public T get(int index) {
-        if (index < 0 || index >= size) return null;
+        if (index < 0 || index >= size) { return null; }
 
         Node<T> p = sentinelNode.next;
         for (int i = 0; i < index; i++) {
