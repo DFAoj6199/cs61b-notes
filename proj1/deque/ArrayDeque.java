@@ -81,7 +81,9 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     public boolean equals(Object o) {
-        if (o == this) return true;
+        if (o == this) {
+            return true;
+        }
         if (!(o instanceof Deque)) {
             return false;
         }
@@ -92,11 +94,8 @@ public class ArrayDeque<T> implements Deque<T> {
             return false;
         }
 
-        Iterator<T> thisIterator = this.iterator();
-        Iterator<?> dqIterator = dq.iterator();
-
-        while (thisIterator.hasNext() && dqIterator.hasNext()) {
-            if (!thisIterator.next().equals(dqIterator.next())) {
+        for (int i = 0; i < this.size(); i++) {
+            if (!this.get(i).equals(dq.get(i))) {
                 return false;
             }
         }
