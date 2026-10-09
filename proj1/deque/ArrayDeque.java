@@ -83,7 +83,6 @@ public class ArrayDeque<T> implements Deque<T> {
         return itemsToRemove;
     }
 
-    @Override
     public boolean equals(Object o) {
         if (o == this) return true;
         if (!(o instanceof Deque)) {

@@ -136,7 +136,6 @@ public class LinkedListDeque<T> implements Deque<T> {
         return itemsToReturn.data;
     }
 
-    @Override
     public boolean equals(Object o) {
         if (o == this) return true;
         if (!(o instanceof Deque)) {
