@@ -68,7 +68,9 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T removeLast() {
-        if (isEmpty()) { return null; }
+        if (isEmpty()) {
+            return null;
+        }
         if (size < arr.length / 4 && arr.length >= 16) {
             resize(arr.length / 2);
         }
@@ -84,28 +86,33 @@ public class ArrayDeque<T> implements Deque<T> {
     @Override
     public boolean equals(Object o) {
         if (o == this) return true;
-        if (o instanceof Deque dq) {
-            if (dq.size() != this.size()) {
+        if (!(o instanceof Deque)) {
+            return false;
+        }
+
+        Deque<?> dq = (Deque<?>) o;
+
+        if (dq.size() != this.size()) {
+            return false;
+        }
+
+        Iterator<T> thisIterator = this.iterator();
+        Iterator<?> dqIterator = dq.iterator();
+
+        while (thisIterator.hasNext() && dqIterator.hasNext()) {
+            if (!thisIterator.next().equals(dqIterator.next())) {
                 return false;
             }
-
-            Iterator<T> thisIterator = this.iterator();
-            Iterator<T> dqIterator = dq.iterator();
-
-            while (thisIterator.hasNext() && dqIterator.hasNext()) {
-                if (!thisIterator.next().equals(dqIterator.next())) {
-                    return false;
-                }
-            }
-
-            return true;
         }
-        return false;
+
+        return true;
     }
 
     @Override
     public T removeFirst() {
-        if (isEmpty()) { return null; }
+        if (isEmpty()) {
+            return null;
+        }
         if (size < arr.length / 4 && arr.length >= 16) {
             resize(arr.length / 2);
         }

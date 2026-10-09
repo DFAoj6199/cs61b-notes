@@ -43,17 +43,21 @@ public class LinkedListDeque<T> implements Deque<T> {
     /**
      * 递归获取链表第 index 个元素的值
      *
-     * @param n 当前指针指向的元素
+     * @param n     当前指针指向的元素
      * @param index 需要找到的索引
      * @return 元素的值
      */
     private T recursive(Node<T> n, int index) {
-        if (index == 0) { return n.data; }
+        if (index == 0) {
+            return n.data;
+        }
         return recursive(n.next, index - 1);
     }
 
     public T getRecursive(int index) {
-        if (index < 0 || index >= size) { return null; }
+        if (index < 0 || index >= size) {
+            return null;
+        }
         return recursive(sentinelNode.next, index);
     }
 
@@ -98,7 +102,9 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public T removeFirst() {
-        if (isEmpty()) { return null; }
+        if (isEmpty()) {
+            return null;
+        }
 
         Node<T> itemsToReturn = sentinelNode.next;
 
@@ -114,7 +120,9 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public T removeLast() {
-        if (isEmpty()) { return null; }
+        if (isEmpty()) {
+            return null;
+        }
 
         Node<T> itemsToReturn = sentinelNode.pre;
 
@@ -131,28 +139,33 @@ public class LinkedListDeque<T> implements Deque<T> {
     @Override
     public boolean equals(Object o) {
         if (o == this) return true;
-        if (o instanceof Deque dq) {
-            if (size() != dq.size()) {
+        if (!(o instanceof Deque)) {
+            return false;
+        }
+
+        Deque<?> dq = (Deque<?>) o;
+
+        if (dq.size() != this.size()) {
+            return false;
+        }
+
+        Iterator<T> thisIterator = this.iterator();
+        Iterator<?> dqIterator = dq.iterator();
+
+        while (thisIterator.hasNext() && dqIterator.hasNext()) {
+            if (!thisIterator.next().equals(dqIterator.next())) {
                 return false;
             }
-
-            Iterator<T> thisIterator = this.iterator();
-            Iterator<T> dqIterator = dq.iterator();
-
-            while (thisIterator.hasNext() && dqIterator.hasNext()) {
-                if (!thisIterator.next().equals(dqIterator.next())) {
-                    return false;
-                }
-            }
-
-            return true;
         }
-        return false;
+
+        return true;
     }
 
     @Override
     public T get(int index) {
-        if (index < 0 || index >= size) { return null; }
+        if (index < 0 || index >= size) {
+            return null;
+        }
 
         Node<T> p = sentinelNode.next;
         for (int i = 0; i < index; i++) {
