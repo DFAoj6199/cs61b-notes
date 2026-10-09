@@ -15,7 +15,6 @@ public class ArrayDeque<T> implements Deque<T> {
         nextTail = 1;
     }
 
-    @Override
     public Iterator<T> iterator() {
         return new ArrayDequeIterator();
     }
@@ -23,12 +22,10 @@ public class ArrayDeque<T> implements Deque<T> {
     private class ArrayDequeIterator implements Iterator<T> {
         private int index = 0;
 
-        @Override
         public boolean hasNext() {
             return index < size;
         }
 
-        @Override
         public T next() {
             T itemToReturn = get(index++);
             return itemToReturn;

@@ -22,12 +22,10 @@ public class LinkedListDeque<T> implements Deque<T> {
     private class LinkedListDequeIterator implements Iterator<T> {
         Node<T> current = sentinelNode.next;
 
-        @Override
         public boolean hasNext() {
             return current != sentinelNode;
         }
 
-        @Override
         public T next() {
             T itemsToReturn = current.data;
             current = current.next;
@@ -35,7 +33,6 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
     }
 
-    @Override
     public Iterator<T> iterator() {
         return new LinkedListDequeIterator();
     }
