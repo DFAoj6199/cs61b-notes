@@ -16,9 +16,10 @@ public class ArraySet<T> implements Iterable<T> {
 
     /**
      * A method to provide a convenient way to create an ArraySet
+     *
      * @param stuff All the item to add to the set
-     * @return A whole ArraySet that contain the item in the param
      * @param <E>
+     * @return A whole ArraySet that contain the item in the param
      */
     public static <E> ArraySet<E> of(E... stuff) {
         ArraySet<E> setToReturn = new ArraySet<>();
@@ -40,7 +41,7 @@ public class ArraySet<T> implements Iterable<T> {
 //    }
 
     /*A better version of toString method
-    * use String.join() method*/
+     * use String.join() method*/
     @Override
     public String toString() {
         List<String> returnString = new ArrayList<>();
@@ -72,12 +73,13 @@ public class ArraySet<T> implements Iterable<T> {
                 if (!oas.contains(item)) return false;
             }
             return true;
-       }
+        }
         return false;
     }
 
     private class arrayIterator implements Iterator<T> {
         private int index;
+
         public arrayIterator() {
             index = 0;
         }

@@ -19,7 +19,9 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
     }
 
     private T getMax(Comparator<T> c) {
-        if (isEmpty()) { return null; }
+        if (isEmpty()) {
+            return null;
+        }
         T maxItem = get(0);
         for (int i = 1; i < size(); i++) {
             T cmpItem = get(i);
