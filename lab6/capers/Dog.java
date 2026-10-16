@@ -10,8 +10,8 @@ import static capers.Utils.*;
 public class Dog implements Serializable {
 
     /** Folder that dogs live in. */
-    static final File DOG_FOLDER = Utils.join(".capers", "dogs"); // TOD0 (hint: look at the `join`
-                                                                                //      function in Utils)
+    static final File DOG_FOLDER = Utils.join(CapersRepository.CAPERS_FOLDER.toString(), "dogs"); // TOD0 (hint: look at the `join`
+                                                                                                        //      function in Utils)
 
     /** Age of dog. */
     private int age;
@@ -60,11 +60,6 @@ public class Dog implements Serializable {
      */
     public void saveDog() {
         // TOD0 (hint: don't forget dog names are unique)
-        File outFile = new File(name);
-        writeObject(outFile, Dog.class);
-        if (!DOG_FOLDER.exists()) {
-            DOG_FOLDER.mkdir();
-        }
 
     }
 
