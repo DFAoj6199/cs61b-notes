@@ -1,5 +1,7 @@
 package bstmap;
 
+import java.util.Set;
+
 public class BSTMap<K extends Comparable<K>, V> implements Map61B<K extends Comparable<K>, V> {
     private Node root;
     private int size;
@@ -51,6 +53,9 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K extends Comp
 
     @Override
     public V get(K key) {
+        if (!containsKey(key)) {
+            return null;
+        }
         return getVal(root, key);
     }
 
@@ -92,4 +97,56 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K extends Comp
         }
         return root;
     }
+
+    @Override
+    public Set<K> keySet() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public V remove(K key) {
+        if (!containsKey(key)) {
+            return null;
+        }
+        root = delete(root, key);
+        return get(key);
+    }
+
+    private Node delete(Node root, K key) {
+        int cmp = key.compareTo(root.key);
+        if (cmp < 0) {
+            root.left = delete(root.left, key);
+        } else if (cmp > 0) {
+            root.right = delete(root.right, key);
+        } else {
+            if (root.left == null && root.right == null) {
+                return null;
+            } else if (root.left == null && root.right != null) {
+                return root.right;
+            } else if (root.left != null && root.right == null) {
+                return root.left;
+            } else {
+                Node tmp = root;
+                root = findMin(tmp.right);
+                root.right = deleteMin(tmp.right);
+                root.left = tmp.left;
+            }
+        }
+        return root;
+    }
+
+    private Node deleteMin(Node root) {
+        if (root.left == null) return root.right;
+        root.left = deleteMin(root.left);
+        return root;
+    }
+
+    private Node findMin(Node root) {
+        Node tmp = root;
+        while (tmp.left != null) {
+            tmp = tmp.left;
+        }
+        return tmp;
+    }
+
 }
