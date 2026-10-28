@@ -46,11 +46,6 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         }
     }
 
-    @Override
-    public void forEach(Consumer<? super K> action) {
-        throw new UnsupportedOperationException();
-    }
-
     private class Node {
         private K key;
         private V val;
@@ -202,5 +197,19 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         return remove(key);
     }
 
+    public void printInOrder() {
+        dfs(root);
+        System.out.println();
+    }
+
+    private void dfs(Node root) {
+        if (root == null) {
+            return;
+        }
+
+        dfs(root.left);
+        System.out.print(root.key + " ");
+        dfs(root.right);
+    }
 
 }
